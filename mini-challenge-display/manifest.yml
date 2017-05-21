@@ -1,0 +1,5 @@
+app-dir: .
+disk_quota: 2048
+memory: 256
+name: mini-challenge-display
+framework: php
