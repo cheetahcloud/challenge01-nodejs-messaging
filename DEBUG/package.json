@@ -1,0 +1,12 @@
+{
+  "name": "challenge01",
+  "author": "CHEETAH",
+  "version": "0.0.3",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "dependencies": {
+    "amqplib": ">= 0.1.0",
+    "sanitizer": ">=0"
+  }
+}
