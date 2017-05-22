@@ -18,32 +18,32 @@ function rabbitUrl() {
     return null;
   }
   else {
-    return "amqp://docker.cheetah.ac:5000";
+    return "amqp://localhost";
   }
 }
 
-var port = 3000;
+var port = 3030;
 
 var messages = [];
 
 function setup() {
 
-  var exchange = conn.exchange('hello', {'type': 'fanout', durable: true}, function() {
+  var exchange = conn.exchange('challenge', {'type': 'fanout', durable: false}, function() {
 
-    var queue = conn.queue('', {durable: false, exclusive: true},
+	  var queue = conn.queue('cheetah', {durable: true, exclusive: false, autoDelete: false},
     function() {
+  //OFF CONSUME    
       queue.subscribe(function(msg) {
         messages.push(htmlEscape(msg.body));
-          /*
-        if (messages.length > 5) {
-          messages.shift();
-        }
-        */
+         
       });
+  //END
       queue.bind(exchange.name, '');
-    });
+   
+   });
     queue.on('queueBindOk', function() { httpServer(exchange); });
   });
+
 }
 
 function httpServer(exchange) {
