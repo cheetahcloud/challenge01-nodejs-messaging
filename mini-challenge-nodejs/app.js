@@ -78,6 +78,16 @@ function httpServer(exchange) {
         res.end();
       });
     }
+    else if (req.method == 'GET' && url.pathname.indexOf("/API/") == 0) {
+     //   if (url.pathname.split('/').count() >= 2)
+      //  {
+        msg = url.pathname.split('/')[2];
+        exchange.publish('', {body: msg});
+       // }
+        res.statusCode = 303;
+        res.setHeader('Location', '/');
+        res.end();
+    }
     else {
       res.statusCode = 404;
       res.end("This is not the page you were looking for.");
